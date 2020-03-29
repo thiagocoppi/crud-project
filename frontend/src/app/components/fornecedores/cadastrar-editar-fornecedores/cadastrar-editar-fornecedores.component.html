@@ -1,0 +1,143 @@
+<div class="contianer">
+  <div class="hero-body">
+    <div class="columns">
+      <div class="column is-half is-offset-one-quarter">
+        <div class="box">
+          <form role="form" (submit)="cadastrarOuAtualizar()" #form="ngForm">
+            <div class="title">Cadastro</div>
+            <div class="columns">
+              <div class="column field">
+                <label class="label">Nome</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="Digite o nome do fornecedor"
+                    name="nome"
+                    [(ngModel)]="fornecedor.nome"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="column field">
+                <label class="label">Identificador</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="Digite o CNPJ ou CPF"
+                    name="cnpj"
+                    type="number"
+                    (input)="verificarCPfCnpj($event.target.value)"
+                    [(ngModel)]="fornecedor.identificadorReceitaFederal"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="column field">
+                <label class="label">Empresa</label>
+                <div class="control">
+                  <div class="select">
+                    <select
+                      name="empresa"
+                      (change)="onChange($event.target.value)"
+                    >                      
+                      <option selected disabled>Selecione</option>
+                      <option [selected]="empresa.id == fornecedor.empresa.id"
+                        [value]="(empresa.id)"
+                        *ngFor="let empresa of empresas"
+                        >{{ empresa.nomeFantasia }}</option
+                      >
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="showDadosPessoas">
+              <hr />
+              <h3 style="font-weight: bold;">Dados Pessoais</h3>
+              <div class="columns">
+                <div class="column field">
+                  <label class="label">RG</label>
+                  <div class="control">
+                    <input
+                      mask="00.000.000-0"
+                      class="input"
+                      type="text"
+                      placeholder="Digite o RG"
+                      name="rg"
+                      [(ngModel)]="fornecedor.dadosPessoais.identificador"
+                    />
+                  </div>
+                </div>
+                <div class="column field">
+                  <label class="label">Data nascimento</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="Digite sua data de nascimento"
+                      mask="d0/M0/0000"
+                      placeholder="dd/mm/yyyy"
+                      name="datanascimento"
+                      [showMaskTyped]="true"
+                      dropSpecialCharacters="true"
+                      [specialCharacters]="['/']"
+                      [(ngModel)]="dataNascimento"
+                    />
+                  </div>
+                </div>
+                <div class="column field">
+                  <label class="label">Idade</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="number"
+                      placeholder="Digite sua idade"
+                      name="idade"
+                      [(ngModel)]="fornecedor.dadosPessoais.idade"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="fornecedor.id" class="columns">
+                <div class="column field is-one-third">
+                  <label class="label">Data cadastro</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="Digite a data de cadsatro"
+                      mask="d0/M0/0000"
+                      placeholder="dd/mm/yyyy"
+                      name="dataCadastro"
+                      [showMaskTyped]="true"
+                      dropSpecialCharacters="true"
+                      [specialCharacters]="['/']"
+                      [(ngModel)]="dataCadastro"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="column">
+                <div class="field is-grouped">
+                  <div class="control">
+                    <button class="button is-link">Salvar</button>
+                  </div>
+                  <div class="control">
+                    <button class="button is-white" [routerLink]="['/fornecedores']">Cancelar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Spinner -->
+<ngx-spinner></ngx-spinner>

@@ -1,0 +1,53 @@
+<div class="contianer">
+  <div class="hero-body">
+    <div class="columns">
+      <div class="column is-half is-offset-one-quarter">
+        <div class="box">
+          <form role="form" (submit)="cadastrarOuAtualizarEmpresa()" #form="ngForm">
+            <div class="title">Cadastro</div>
+            <div class="columns">
+              <div class="column field">
+                <label class="label">Nome Fantasia</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Digite o nome fantasia da empresa" name="nomeFantasia" [(ngModel)]="empresa.nomeFantasia" required/>
+                </div>
+              </div>
+              <div class="column field">
+                <label class="label">CNPJ</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Digite o CNPJ da empresa" mask="00.000.000/0000-00" name="cnpj" [(ngModel)]="empresa.cnpj" required/>
+                </div>
+              </div>
+              <div class="column field">
+                <label class="label">Unidade Federativa</label>
+                <div class="control">
+                  <div class="select">
+                    <select name="uf" [(ngModel)]="ufSelect" (change)="onChange($event.target.value)">
+                      <option selected disabled>Selecione</option>
+                      <option *ngFor="let uf of ufs">{{uf}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="column">
+                <div class="field is-grouped">
+                  <div class="control">
+                    <button class="button is-link">Salvar</button>
+                  </div>
+                  <div class="control">
+                    <button class="button is-white" [routerLink]="['/empresas']">Cancelar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Spinner -->
+<ngx-spinner></ngx-spinner>

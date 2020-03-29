@@ -1,0 +1,42 @@
+<div class="contianer">
+  <div class="hero-body">
+    <div class="columns">
+      <div class="column is-half is-offset-one-quarter">
+        <div class="box">
+          <form>
+            <div class="title">Listagem empresas</div>
+            <table class="table ocupar-toda-div">
+              <thead>
+                <tr>
+                  <th>Nome Fantasia</th>
+                  <th>CNPJ</th>
+                  <th>UF</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let empresa of empresas">
+                  <th>{{empresa.nomeFantasia}}</th>
+                  <td>{{empresa.cnpj}}</td>
+                  <td>{{empresa.uf}}</td>
+                  <td>
+                    <div class="buttons">
+                      <button class="button is-warning is-light has-tooltip-right" data-tooltip="Editar" [routerLink]="['/cadastrar-empresa', empresa.id]">
+                        <span class="icon">
+                          <i class="far fa-edit"></i>
+                        </span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Spinner -->
+<ngx-spinner></ngx-spinner>

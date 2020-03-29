@@ -1,0 +1,1 @@
+export const CRUD_API = "https://localhost:5001/api/";
