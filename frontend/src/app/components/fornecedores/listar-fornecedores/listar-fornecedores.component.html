@@ -1,54 +1,125 @@
 <div class="contianer">
-    <div class="hero-body">
-      <div class="columns">
-        <div class="column is-half is-offset-one-quarter">
-          <div class="box">
-            <form>
+  <div class="hero-body">
+    <div class="columns">
+      <div class="column is-half is-offset-one-quarter">
+        <div class="box">
+          <form>
+            <div class="level">
               <div class="title">Listagem fornecedores</div>
-              <div class="table-container">
-                <table class="table is-full">
-                  <thead>
-                    <tr>
-                      <th>Nome</th>
-                      <th>Identificiador Receita</th>
-                      <th>Empresa</th>
-                      <th>Identificação Empresa</th>
-                      <th>UF Empresa</th>
-                      <th style="width: 115px;">Ações</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let fornecedor of fornecedores">
-                      <th>{{fornecedor.nome}}</th>
-                      <td>{{fornecedor.identificadorReceitaFederal}}</td>
-                      <td>{{fornecedor.empresa.nomeFantasia}}</td>
-                      <td>{{fornecedor.empresa.cnpj}}</td>
-                      <td>{{fornecedor.empresa.uf}}</td>
-                      <td style="width: 115px;float: left;">
-                        <div class="buttons">
-                          <button class="button is-warning is-light has-tooltip-right" data-tooltip="Editar" [routerLink]="['/cadastrar-fornecedor', fornecedor.id]">
-                            <span class="icon">
-                              <i class="far fa-edit"></i>
-                            </span>
-                          </button>
-                          <button class="button is-danger is-light has-tooltip-right" data-tooltip="Remover" (click)="removerFornecedor(fornecedor.id)">
-                            <span class="icon">
-                              <i class="fas fa-trash"></i>
-                            </span>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div class="level-right">
+                <a
+                  class="button is-white"
+                  data-tooltip="Mostrar/Esconder Filtros"
+                  (click)="esconderMostrarFiltros()"
+                >
+                  <span class="icon">
+                    <i class="fas fa-filter"></i>
+                  </span>
+                </a>
               </div>
-
-            </form>
-          </div>
+            </div>
+            <div *ngIf="mostrarFiltro">
+              <div class="columns">
+                <div class="column">
+                  <div class="control">
+                    <label class="label">CPF ou CNPJ</label>
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="Digite o CPF ou CNPJ do fornecedor"
+                      name="nome"
+                      [(ngModel)]="cpfCnpjFilter"
+                    />
+                  </div>
+                </div>
+                <div class="column control">
+                  <label class="label">Data cadastro</label>
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="Digite a data de cadastro"
+                    mask="d0/M0/0000"
+                    placeholder="dd/mm/yyyy"
+                    name="dataCadastroFilter"
+                    [showMaskTyped]="true"
+                    dropSpecialCharacters="true"
+                    [specialCharacters]="['/']"
+                    [(ngModel)]="dataCadastroFilter"
+                  />
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <div class="field is-grouped">
+                    <div class="control">
+                      <button type="button" class="button is-link" (click)="filtrarFornecedores()">
+                        Filtrar
+                      </button>
+                    </div>
+                    <div class="control">
+                      <button type="button" class="button is-white" (click)="obterTodosFornecedores()">Resetar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+            </div>
+            <div class="table-container">
+              <table class="table is-full">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Identificiador Receita</th>
+                    <th>Data cadastro</th>
+                    <th>Empresa</th>
+                    <th>Identificação Empresa</th>
+                    <th>UF Empresa</th>
+                    <th style="width: 115px;">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let fornecedor of fornecedores">
+                    <th>{{ fornecedor.nome }}</th>
+                    <td>{{ fornecedor.identificadorReceitaFederal }}</td>
+                    <td>{{ fornecedor.dataCadastro | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ fornecedor.empresa.nomeFantasia }}</td>
+                    <td>{{ fornecedor.empresa.cnpj }}</td>
+                    <td>{{ fornecedor.empresa.uf }}</td>
+                    <td style="width: 115px;float: left;">
+                      <div class="buttons">
+                        <button
+                          class="button is-warning is-light has-tooltip-right"
+                          data-tooltip="Editar"
+                          [routerLink]="[
+                            '/cadastrar-fornecedor',
+                            fornecedor.id
+                          ]"
+                        >
+                          <span class="icon">
+                            <i class="far fa-edit"></i>
+                          </span>
+                        </button>
+                        <button
+                          class="button is-danger is-light has-tooltip-right"
+                          data-tooltip="Remover"
+                          (click)="removerFornecedor(fornecedor.id)"
+                        >
+                          <span class="icon">
+                            <i class="fas fa-trash"></i>
+                          </span>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
-  
-  <!-- Spinner -->
-  <ngx-spinner></ngx-spinner>
+</div>
+
+<!-- Spinner -->
+<ngx-spinner></ngx-spinner>

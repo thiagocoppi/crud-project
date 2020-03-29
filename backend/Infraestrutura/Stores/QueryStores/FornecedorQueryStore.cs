@@ -16,23 +16,32 @@ namespace Infraestrutura.Stores.QueryStores
             _crudContext = crudContext;
         }
 
-        public Task<List<Fornecedor>> FiltrarFornecedores(string filtro, DateTime dataCadastro)
+        public async Task<List<Fornecedor>> FiltrarFornecedores(string filtro, DateTime dataCadastro)
         {
-            var fornecedoresQuery = _crudContext.Fornecedore.AsQueryable().Include(r => r.Empresa);
+            var fornecedoresQuery = _crudContext.Fornecedore.Include(r => r.Empresa).AsQueryable().AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(filtro))
             {
-                fornecedoresQuery
-                    .Where(r => r.Nome.ToUpper().Contains(filtro.ToUpper()))
-                    .Where(r => r.IdentificadorReceitaFederal.Contains(filtro));
+                var isNomeFilter = filtro.Any(x => char.IsLetter(x));
+
+                if (isNomeFilter)
+                {
+                    fornecedoresQuery = fornecedoresQuery.Where(r => r.Nome.ToUpper().Contains(filtro.ToUpper()));
+                }
+                else
+                {
+                    fornecedoresQuery = fornecedoresQuery.Where(r => r.IdentificadorReceitaFederal.Contains(filtro));
+                }
             }
 
             if (dataCadastro != DateTime.MinValue)
             {
-                fornecedoresQuery.Where(r => r.DataCadastro.Equals(dataCadastro));
+                fornecedoresQuery = fornecedoresQuery.Where(r => r.DataCadastro.Date.Equals(dataCadastro.Date));
             }
 
-            return Task.FromResult(fornecedoresQuery.ToList());
+            var fornecedoresFiltrados = await fornecedoresQuery.ToListAsync();
+
+            return fornecedoresFiltrados;
         }
 
         public async Task<Fornecedor> FiltrarFornecedorPeloId(Guid id)

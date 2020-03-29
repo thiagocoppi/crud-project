@@ -16,7 +16,11 @@
                     name="nome"
                     [(ngModel)]="fornecedor.nome"
                     required
+                    #nome="ngModel"
                   />
+                </div>
+                <div *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+                  <p class="help is-danger has-text-weight-bold">É obrigatório informar o nome do fornecedor</p>
                 </div>
               </div>
               <div class="column field">
@@ -30,8 +34,12 @@
                     type="number"
                     (input)="verificarCPfCnpj($event.target.value)"
                     [(ngModel)]="fornecedor.identificadorReceitaFederal"
+                    #identificador="ngModel"
                     required
                   />
+                </div>
+                <div *ngIf="identificador.invalid && (identificador.dirty || identificador.touched)">
+                  <p class="help is-danger has-text-weight-bold">É obrigatório informar o identificador do fornecedor</p>
                 </div>
               </div>
               <div class="column field">
@@ -124,7 +132,7 @@
               <div class="column">
                 <div class="field is-grouped">
                   <div class="control">
-                    <button class="button is-link">Salvar</button>
+                    <button class="button is-link" [disabled]="form.invalid" >Salvar</button>
                   </div>
                   <div class="control">
                     <button class="button is-white" [routerLink]="['/fornecedores']">Cancelar</button>

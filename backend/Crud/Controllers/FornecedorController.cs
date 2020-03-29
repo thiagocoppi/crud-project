@@ -45,7 +45,7 @@ namespace Crud.Controllers
             return Ok(listaFornecedoresQueryResult);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("filtrar")]
         public async Task<IActionResult> Listar([FromBody] FiltrarFornecedoresQueryRequest query)
         {

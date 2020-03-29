@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { ListarFornecedoresComponent } from './components/fornecedores/listar-fornecedores/listar-fornecedores.component';
 import { CadastrarEditarFornecedoresComponent } from './components/fornecedores/cadastrar-editar-fornecedores/cadastrar-editar-fornecedores.component';
 import { IdentificadorService } from './utils/identificador.service';
+import { ToastrModule } from 'ngx-toastr';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -37,6 +38,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     AppRoutingModule,
     HttpClientModule,
     NgxSpinnerModule,
+    ToastrModule.forRoot(),
     NgxMaskModule.forRoot(options)
   ],
   providers: [

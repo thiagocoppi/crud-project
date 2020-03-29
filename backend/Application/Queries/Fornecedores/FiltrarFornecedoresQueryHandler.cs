@@ -36,7 +36,8 @@ namespace Application.Queries.Fornecedores
                         CNPJ = r.Empresa.CNPJ,
                         NomeFantasia = r.Empresa.NomeFantasia,
                         UF = r.Empresa.UF.ToString()
-                    }
+                    },
+                    DataCadastro = r.DataCadastro
                 });
             });
 

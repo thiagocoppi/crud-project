@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Empresa } from '../empresa.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-criar-editar-empresa',
@@ -13,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CriarEditarEmpresaComponent implements OnInit {
 
   constructor(private empresaService: EmpresaService, private spinner: NgxSpinnerService, 
-    private route: ActivatedRoute, private router: Router) 
+    private route: ActivatedRoute, private router: Router, private toastrService: ToastrService) 
   { }
 
   public ufs : String[] = ['RO','AC','AM','RR','PA','AP','TO','MA','PI','CE','RN','PB','PE','AL','SE','BA','MG','ES','RJ','SP','PR','SC','RS','MS','MT','GO','DF'];
@@ -46,7 +47,7 @@ export class CriarEditarEmpresaComponent implements OnInit {
         this.spinner.hide();
       }))
       .subscribe(() => {
-        //Adicionar toastr de empresa cadastrada
+        this.toastrService.success('Empresa atualizada com sucesso!', 'Empresa');
         this.router.navigateByUrl('/empresas');
       });
       return;
@@ -57,8 +58,20 @@ export class CriarEditarEmpresaComponent implements OnInit {
         this.spinner.hide();
       }))
       .subscribe(() => {
-        //Adicionar toastr de empresa cadastrada
+        this.toastrService.success('Empresa cadastrada com sucesso!', 'Empresa');
         this.router.navigateByUrl('/empresas');
+      }, (err) => {
+        if (err.status == 400) {
+          var errorsValidation = err.error.errors;
+          for(var item in errorsValidation) {
+            this.toastrService.error(err.error.errors[item], 'Empresa');
+          }
+
+          return;
+        }
+        
+        this.toastrService.error('Ocorreu um erro interno', 'Empresa');
+        
       });
   }
 

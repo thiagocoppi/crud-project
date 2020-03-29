@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Canonico.ReceitaFederal;
+using FluentValidation;
 using Languages;
 
 namespace Application.Commands.Empresas.Create
@@ -17,6 +18,14 @@ namespace Application.Commands.Empresas.Create
 
             RuleFor(r => r.UF)
                 .NotNull().WithMessage(Mensagens.EmpresaUFObrigatorio);
+
+            RuleFor(r => r.CNPJ).Custom((s, context) =>
+            {
+                if (!s.IsCnpj())
+                {
+                    context.AddFailure(Mensagens.CNPJInvalidoTitulo, Mensagens.CNPJInvalidoTexto);
+                }
+            });
         }
     }
 }

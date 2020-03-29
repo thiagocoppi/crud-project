@@ -61,6 +61,24 @@ namespace Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O CNPJ informado é inválido.
+        /// </summary>
+        public static string CNPJInvalidoTexto {
+            get {
+                return ResourceManager.GetString("CNPJInvalidoTexto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CNPJ Inválido.
+        /// </summary>
+        public static string CNPJInvalidoTitulo {
+            get {
+                return ResourceManager.GetString("CNPJInvalidoTitulo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to É obrigatório informar o CNPJ.
         /// </summary>
         public static string EmpresaCnpjObrigatorio {

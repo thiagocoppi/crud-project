@@ -6,8 +6,9 @@ import { Empresa } from "../../empresas/empresa.model";
 import { finalize } from "rxjs/operators";
 import { NgxSpinnerService } from "ngx-spinner";
 import { IdentificadorService } from "src/app/utils/identificador.service";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: "app-cadastrar-editar-fornecedores",
@@ -20,7 +21,9 @@ export class CadastrarEditarFornecedoresComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private identificadorService: IdentificadorService,
     private fornecedorService: FornecedoresService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private toatrService: ToastrService
   ) {}
 
   public fornecedor: Fornecedor = new Fornecedor();
@@ -105,7 +108,26 @@ export class CadastrarEditarFornecedoresComponent implements OnInit {
       })
     )
     .subscribe(() => {
-      // Adicionar notificação de retorno
+      this.toatrService.success('Fornecedor atualizado!', 'Fornecedor');
+      this.router.navigateByUrl('/fornecedores');
+    }, (err) => {
+      if (err.status == 400) {
+        var errorsValidation = err.error.errors;
+        if (errorsValidation){
+          for(var item in errorsValidation) {
+            this.toatrService.error(err.error.errors[item], 'Fornecedor');
+          }
+        } else {
+          for(let errorItem in err.error.Errors){
+            var mensagemItem = err.error.Errors[errorItem];
+            this.toatrService.error(mensagemItem.Message, 'Fornecedor');
+          }
+        }
+
+        return;
+      }
+
+      this.toatrService.error('Ocorreu um erro interno', 'Fornecedor');
     })
   }
 }

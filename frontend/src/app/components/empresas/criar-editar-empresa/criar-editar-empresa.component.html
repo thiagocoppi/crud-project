@@ -3,30 +3,76 @@
     <div class="columns">
       <div class="column is-half is-offset-one-quarter">
         <div class="box">
-          <form role="form" (submit)="cadastrarOuAtualizarEmpresa()" #form="ngForm">
+          <form
+            role="form"
+            (submit)="cadastrarOuAtualizarEmpresa()"
+            #form="ngForm"
+          >
             <div class="title">Cadastro</div>
             <div class="columns">
               <div class="column field">
                 <label class="label">Nome Fantasia</label>
                 <div class="control">
-                  <input class="input" type="text" placeholder="Digite o nome fantasia da empresa" name="nomeFantasia" [(ngModel)]="empresa.nomeFantasia" required/>
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="Digite o nome fantasia da empresa"
+                    name="nomeFantasia"
+                    #nomeFantasia="ngModel"
+                    [(ngModel)]="empresa.nomeFantasia"
+                    required
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    nomeFantasia.invalid &&
+                    (nomeFantasia.dirty || nomeFantasia.touched)
+                  "
+                >
+                  <p class="help is-danger has-text-weight-bold">
+                    É obrigatório informar o nome da empresa
+                  </p>
                 </div>
               </div>
               <div class="column field">
                 <label class="label">CNPJ</label>
                 <div class="control">
-                  <input class="input" type="text" placeholder="Digite o CNPJ da empresa" mask="00.000.000/0000-00" name="cnpj" [(ngModel)]="empresa.cnpj" required/>
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="Digite o CNPJ da empresa"
+                    mask="00.000.000/0000-00"
+                    name="cnpj"
+                    #cnpj="ngModel"
+                    [(ngModel)]="empresa.cnpj"
+                    required
+                  />
+                </div>
+                <div *ngIf="cnpj.invalid && (cnpj.dirty || cnpj.touched)">
+                  <p class="help is-danger has-text-weight-bold">
+                    É obrigatório informar o CNPJ
+                  </p>
                 </div>
               </div>
               <div class="column field">
                 <label class="label">Unidade Federativa</label>
                 <div class="control">
                   <div class="select">
-                    <select name="uf" [(ngModel)]="ufSelect" (change)="onChange($event.target.value)">
+                    <select
+                      name="uf"
+                      [(ngModel)]="ufSelect"
+                      #uf="ngModel"
+                      (change)="onChange($event.target.value)"
+                    >
                       <option selected disabled>Selecione</option>
-                      <option *ngFor="let uf of ufs">{{uf}}</option>
+                      <option *ngFor="let uf of ufs">{{ uf }}</option>
                     </select>
                   </div>
+                </div>
+                <div *ngIf="uf.invalid && (uf.dirty || uf.touched)">
+                  <p class="help is-danger has-text-weight-bold">
+                    É obrigatório informar o UF
+                  </p>
                 </div>
               </div>
             </div>
@@ -34,10 +80,17 @@
               <div class="column">
                 <div class="field is-grouped">
                   <div class="control">
-                    <button class="button is-link">Salvar</button>
+                    <button class="button is-link" [disabled]="form.invalid">
+                      Salvar
+                    </button>
                   </div>
                   <div class="control">
-                    <button class="button is-white" [routerLink]="['/empresas']">Cancelar</button>
+                    <button
+                      class="button is-white"
+                      [routerLink]="['/empresas']"
+                    >
+                      Cancelar
+                    </button>
                   </div>
                 </div>
               </div>

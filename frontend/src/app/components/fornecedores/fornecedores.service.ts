@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 import { Fornecedor } from './fornecedor.model';
 import { CreateFornecedorModel } from './cadastrar-editar-fornecedores/models/create-fornecedor.model';
 import { ObterFornecedorId } from './cadastrar-editar-fornecedores/models/obter-fornecedor.model';
-import * as moment from 'moment';
 import { UpdateFornecedorModel } from './cadastrar-editar-fornecedores/models/update-fornecedor.model';
+import { FiltrarFornecedor } from './listar-fornecedores/models/filtrar-fornecedor.model';
 
 
 @Injectable({
@@ -50,6 +50,20 @@ export class FornecedoresService {
 
   obterFornecedorPeloId(id: string): Observable<ObterFornecedorId>{
     return this.http.get<ObterFornecedorId>(`${CRUD_API}Fornecedor/${id}`);
+  }
+
+  filtrarFornecedores(cpfCnpj: string, dataCadastro: Date): Observable<ListagemFornecedores> {
+    let filtrarFornecedor = new FiltrarFornecedor();
+    
+    if (cpfCnpj && cpfCnpj != ""){
+      filtrarFornecedor.filtro = cpfCnpj;
+    }
+
+    if (dataCadastro) {
+      filtrarFornecedor.dataCadastro = dataCadastro;
+    }
+    console.log(filtrarFornecedor);
+    return this.http.post<ListagemFornecedores>(`${CRUD_API}Fornecedor/filtrar`, filtrarFornecedor);
   }
 
 
