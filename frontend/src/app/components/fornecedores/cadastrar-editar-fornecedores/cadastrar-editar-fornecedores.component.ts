@@ -58,9 +58,9 @@ export class CadastrarEditarFornecedoresComponent implements OnInit {
       .subscribe(result => {
         this.fornecedor = result.fornecedor;
         this.showDadosPessoas = this.identificadorService.isCPF(this.fornecedor.identificadorReceitaFederal);
+        this.dataCadastro = moment(this.fornecedor.dataCadastro).format('DD/MM/YYYY');
         if (this.showDadosPessoas) {
-          this.dataNascimento = moment(this.fornecedor.dadosPessoais.dataNascimento).format('DD/MM/YYYY');
-          this.dataCadastro = moment(this.fornecedor.dataCadastro).format('DD/MM/YYYY');
+          this.dataNascimento = moment(this.fornecedor.dadosPessoais.dataNascimento).format('DD/MM/YYYY');          
         }
       })
       return;

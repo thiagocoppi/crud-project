@@ -62,7 +62,6 @@ export class FornecedoresService {
     if (dataCadastro) {
       filtrarFornecedor.dataCadastro = dataCadastro;
     }
-    console.log(filtrarFornecedor);
     return this.http.post<ListagemFornecedores>(`${CRUD_API}Fornecedor/filtrar`, filtrarFornecedor);
   }
 

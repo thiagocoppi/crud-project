@@ -13,7 +13,9 @@ export class ListarEmpresaComponent implements OnInit {
 
   constructor(private empresaService: EmpresaService, private spinner: NgxSpinnerService) { }
 
-  public empresas : Array<Empresa>;
+  public empresas : Empresa[] = [];
+  public textoSemRegistros = "Cadastre a sua primeira empresa";
+  public rotaSemRegistros = "/cadastrar-empresa";
 
   ngOnInit(): void {
     this.spinner.show();

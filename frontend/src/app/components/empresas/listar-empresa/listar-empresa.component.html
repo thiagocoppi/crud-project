@@ -3,7 +3,12 @@
     <div class="columns">
       <div class="column is-half is-offset-one-quarter">
         <div class="box">
-          <form>
+          <app-no-registers-found
+            [texto]="textoSemRegistros"
+            [rota]="rotaSemRegistros"
+            *ngIf="empresas.length == 0"
+          ></app-no-registers-found>
+          <form *ngIf="empresas.length > 0">
             <div class="title">Listagem empresas</div>
             <table class="table ocupar-toda-div">
               <thead>
@@ -16,12 +21,16 @@
               </thead>
               <tbody>
                 <tr *ngFor="let empresa of empresas">
-                  <th>{{empresa.nomeFantasia}}</th>
-                  <td>{{empresa.cnpj}}</td>
-                  <td>{{empresa.uf}}</td>
+                  <th>{{ empresa.nomeFantasia }}</th>
+                  <td>{{ empresa.cnpj }}</td>
+                  <td>{{ empresa.uf }}</td>
                   <td>
                     <div class="buttons">
-                      <button class="button is-warning is-light has-tooltip-right" data-tooltip="Editar" [routerLink]="['/cadastrar-empresa', empresa.id]">
+                      <button
+                        class="button is-warning is-light has-tooltip-right"
+                        data-tooltip="Editar"
+                        [routerLink]="['/cadastrar-empresa', empresa.id]"
+                      >
                         <span class="icon">
                           <i class="far fa-edit"></i>
                         </span>

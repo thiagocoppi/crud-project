@@ -16,6 +16,8 @@ export class ListarFornecedoresComponent implements OnInit {
   public mostrarFiltro: Boolean = false;
   public cpfCnpjFilter: string;
   public dataCadastroFilter: string;
+  public textoSemRegistros = "Cadastre a seu primeiro fornecedor";
+  public rotaSemRegistros = "/cadastrar-fornecedor";
 
 
   constructor(

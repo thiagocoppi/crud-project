@@ -1,13 +1,12 @@
 ﻿using Application.Queries.Empresas.Models;
 using Application.Queries.Fornecedores.Models;
-using Canonico.ReceitaFederal;
 using Domain.Fornecedores;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Queries.Fornecedores
+namespace Application.Queries.Fornecedores.FiltrarFornecedores
 {
     public sealed class FiltrarFornecedoresQueryHandler : IRequestHandler<FiltrarFornecedoresQueryRequest, FiltrarFornecedoresQueryResponse>
     {

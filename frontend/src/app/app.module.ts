@@ -4,7 +4,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { CriarEditarEmpresaComponent } from './components/empresas/criar-editar-empresa/criar-editar-empresa.component';
 import { ListarEmpresaComponent } from './components/empresas/listar-empresa/listar-empresa.component';
@@ -17,6 +16,7 @@ import { ListarFornecedoresComponent } from './components/fornecedores/listar-fo
 import { CadastrarEditarFornecedoresComponent } from './components/fornecedores/cadastrar-editar-fornecedores/cadastrar-editar-fornecedores.component';
 import { IdentificadorService } from './utils/identificador.service';
 import { ToastrModule } from 'ngx-toastr';
+import { NoRegistersFoundComponent } from './components/no-registers-found/no-registers-found.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -24,12 +24,12 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
     HomeComponent,
     CriarEditarEmpresaComponent,
     ListarEmpresaComponent,
     ListarFornecedoresComponent,
-    CadastrarEditarFornecedoresComponent
+    CadastrarEditarFornecedoresComponent,
+    NoRegistersFoundComponent
   ],
   imports: [
     BrowserModule,

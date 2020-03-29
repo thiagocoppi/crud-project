@@ -60,6 +60,25 @@
                   </div>
                 </div>
               </div>
+              <div *ngIf="fornecedor.id">
+                <div class="column field">
+                  <label class="label">Data cadastro</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="Digite a data de cadsatro"
+                      mask="d0/M0/0000"
+                      placeholder="dd/mm/yyyy"
+                      name="dataCadastro"
+                      [showMaskTyped]="true"
+                      dropSpecialCharacters="true"
+                      [specialCharacters]="['/']"
+                      [(ngModel)]="dataCadastro"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
             <div *ngIf="showDadosPessoas">
               <hr />
@@ -104,25 +123,6 @@
                       placeholder="Digite sua idade"
                       name="idade"
                       [(ngModel)]="fornecedor.dadosPessoais.idade"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div *ngIf="fornecedor.id" class="columns">
-                <div class="column field is-one-third">
-                  <label class="label">Data cadastro</label>
-                  <div class="control">
-                    <input
-                      class="input"
-                      type="text"
-                      placeholder="Digite a data de cadsatro"
-                      mask="d0/M0/0000"
-                      placeholder="dd/mm/yyyy"
-                      name="dataCadastro"
-                      [showMaskTyped]="true"
-                      dropSpecialCharacters="true"
-                      [specialCharacters]="['/']"
-                      [(ngModel)]="dataCadastro"
                     />
                   </div>
                 </div>

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System;
 
-namespace Application.Queries.Fornecedores
+namespace Application.Queries.Fornecedores.FiltrarFornecedores
 {
     public sealed class FiltrarFornecedoresQueryRequest : IRequest<FiltrarFornecedoresQueryResponse>
     {

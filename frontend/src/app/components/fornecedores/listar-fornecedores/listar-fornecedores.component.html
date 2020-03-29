@@ -3,7 +3,12 @@
     <div class="columns">
       <div class="column is-half is-offset-one-quarter">
         <div class="box">
-          <form>
+          <app-no-registers-found
+          [texto]="textoSemRegistros"
+          [rota]="rotaSemRegistros"
+          *ngIf="fornecedores.length == 0"
+        ></app-no-registers-found>
+          <form *ngIf="fornecedores.length > 0">
             <div class="level">
               <div class="title">Listagem fornecedores</div>
               <div class="level-right">
@@ -22,11 +27,11 @@
               <div class="columns">
                 <div class="column">
                   <div class="control">
-                    <label class="label">CPF ou CNPJ</label>
+                    <label class="label">CPF/CNPJ ou nome</label>
                     <input
                       class="input"
                       type="text"
-                      placeholder="Digite o CPF ou CNPJ do fornecedor"
+                      placeholder="Digite o CPF/CNPJ ou nome do fornecedor"
                       name="nome"
                       [(ngModel)]="cpfCnpjFilter"
                     />
@@ -85,7 +90,7 @@
                     <td>{{ fornecedor.empresa.nomeFantasia }}</td>
                     <td>{{ fornecedor.empresa.cnpj }}</td>
                     <td>{{ fornecedor.empresa.uf }}</td>
-                    <td style="width: 115px;float: left;">
+                    <td style="width: 115px;">
                       <div class="buttons">
                         <button
                           class="button is-warning is-light has-tooltip-right"

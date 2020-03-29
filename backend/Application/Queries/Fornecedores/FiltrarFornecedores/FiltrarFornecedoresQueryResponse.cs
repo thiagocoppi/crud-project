@@ -1,7 +1,7 @@
 ﻿using Application.Queries.Fornecedores.Models;
 using System.Collections.Generic;
 
-namespace Application.Queries.Fornecedores
+namespace Application.Queries.Fornecedores.FiltrarFornecedores
 {
     public sealed class FiltrarFornecedoresQueryResponse
     {

@@ -1,7 +1,7 @@
 ﻿using Application.Commands.Fornecedores.Create;
 using Application.Commands.Fornecedores.Delete;
 using Application.Commands.Fornecedores.Update;
-using Application.Queries.Fornecedores;
+using Application.Queries.Fornecedores.FiltrarFornecedores;
 using Application.Queries.Fornecedores.FiltrarFornecedorPorId;
 using Microsoft.AspNetCore.Mvc;
 using System;
